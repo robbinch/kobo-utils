@@ -1,0 +1,26 @@
+diff -Naur uClibc-343f6b8f1f754e397632b0552e4afe586c8b392b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-forcedunwind.c uClibc-patched/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-forcedunwind.c
+--- uClibc-343f6b8f1f754e397632b0552e4afe586c8b392b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-forcedunwind.c	2015-01-28 17:50:34.000000000 +0800
++++ uClibc-patched/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-forcedunwind.c	2017-04-18 10:13:58.289516106 +0800
+@@ -27,7 +27,8 @@
+ #define __libc_fatal(x)         {/*write(STDERR_FILENO, x, strlen(x));*/ abort();}
+ 
+ static void *libgcc_s_handle;
+-static void (*libgcc_s_resume) (struct _Unwind_Exception *exc);
++static void (*libgcc_s_resume) (struct _Unwind_Exception *exc)
++  __attribute_used__;
+ static _Unwind_Reason_Code (*libgcc_s_personality)
+   (_Unwind_State, struct _Unwind_Exception *, struct _Unwind_Context *);
+ static _Unwind_Reason_Code (*libgcc_s_forcedunwind)
+diff -Naur uClibc-343f6b8f1f754e397632b0552e4afe586c8b392b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-resume.c uClibc-patched/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-resume.c
+--- uClibc-343f6b8f1f754e397632b0552e4afe586c8b392b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-resume.c	2015-01-28 17:50:34.000000000 +0800
++++ uClibc-patched/libpthread/nptl/sysdeps/unix/sysv/linux/arm/unwind-resume.c	2017-04-18 10:14:27.738360540 +0800
+@@ -25,7 +25,8 @@
+ #define __libc_dlclose          dlclose
+ #define __libc_fatal(x)         {/*write(STDERR_FILENO, x, strlen(x));*/ abort();}
+ 
+-static void (*libgcc_s_resume) (struct _Unwind_Exception *exc);
++static void (*libgcc_s_resume) (struct _Unwind_Exception *exc)
++  __attribute_used__;
+ static _Unwind_Reason_Code (*libgcc_s_personality)
+   (_Unwind_State, struct _Unwind_Exception *, struct _Unwind_Context *);
+ 
