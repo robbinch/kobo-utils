@@ -2,5 +2,6 @@ language: nix
 sudo: required
 dist: trusty
 script:
-  - nix-build -A dropbear kobo.nix
-  - file result/bin/dbclient | grep -q 'statically linked'
+  - echo 'nix-build -A dropbear kobo.nix 2>&1 | tail -n500' > build.sh
+  - travis_wait 120 sh build.sh
+  - file result/bin/dbclient | grep 'statically linked'
