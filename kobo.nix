@@ -22,6 +22,10 @@ let
     });
   };
 
+  perl = self: super: {
+    perl = super.perl522;
+  };
+
   dropbear = let
     overrideStatic = self: super: {
       dropbear = super.dropbear.override {
@@ -47,5 +51,5 @@ in nix
     platform = kobo;
   };
 
-  overlays = [ uclibcCross ] ++ dropbear;
+  overlays = [ uclibcCross perl ] ++ dropbear;
 }
